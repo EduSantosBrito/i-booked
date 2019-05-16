@@ -3,15 +3,33 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "auth0-js": "^9.10.2",
+    "axios": "^0.18.0",
+    "classnames": "^2.2.6",
+    "dotenv": "^8.0.0",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.13.0",
+    "gerador-validador-cpf": "^4.0.0-beta.0",
+    "moment": "^2.24.0",
+    "nock": "^10.0.6",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-scripts": "3.0.1"
+    "react-jss": "^8.6.1",
+    "react-notification": "^6.8.4",
+    "react-redux": "^7.0.3",
+    "react-router": "^5.0.0",
+    "react-router-dom": "^5.0.0",
+    "react-scripts": "3.0.1",
+    "react-test-renderer": "^16.8.6",
+    "react-toastify": "^5.1.0",
+    "redux": "^4.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "npm run build && firebase deploy"
   },
   "eslintConfig": {
     "extends": "react-app"

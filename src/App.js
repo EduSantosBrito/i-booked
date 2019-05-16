@@ -1,26 +1,57 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Homepage from "./pages/home";
+import Dashboard from "./pages/dashboard";
+import Callback from "./pages/callback";
+import Book from "./pages/book";
+import Auth from "./components/Auth";
+import CreateRestaurant from "./pages/restaurant/create";
+import EditRestaurant from "./pages/restaurant/edit";
+import DetailRestaurant from "./pages/restaurant/detail";
+import withStyle from "react-jss";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+toast.configure();
+
+const styles = {
+  container: {
+    width: "100%",
+    height: "100%"
+  }
+};
+
+class App extends Component {
+  render() {
+    //1
+    return (
+      <div className={this.props.classes.container}>
+        <ToastContainer />
+        <Auth>
+          <Router>
+            <Switch>
+              <Route exact path="/" component={Homepage} />
+              <Route path="/book/:id" component={Book} />
+              <Route exact path="/dashboard" component={Dashboard} />
+              <Route
+                path="/dashboard/restaurant/create"
+                component={CreateRestaurant}
+              />
+              <Route
+                path="/dashboard/restaurant/edit/:id"
+                component={EditRestaurant}
+              />
+              <Route
+                path="/dashboard/restaurant/details/:id"
+                component={DetailRestaurant}
+              />
+              <Route path="/callback" component={Callback} />
+            </Switch>
+          </Router>
+        </Auth>
+      </div>
+    );
+  }
 }
 
-export default App;
+export default withStyle(styles)(App);
