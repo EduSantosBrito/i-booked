@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { validate as validateCPF } from "gerador-validador-cpf";
-import * as moment from "moment";
+import moment from "moment";
 import Axios from "axios";
 import backgroundImage from "../assets/images/backgroundImage.jpg";
 import withStyle from "react-jss";
@@ -89,6 +89,7 @@ class Book extends Component {
       rg: "",
       birthday: "",
       quantity: 0,
+      errorMsg: null,
       restaurant: null
     };
   }
@@ -198,26 +199,31 @@ class Book extends Component {
       if (restaurant.available - quantity >= 0) {
         if (validateCPF(cpf)) {
           if (moment().diff(birthday, "years") >= 18) {
+            this.setState({errorMsg: null})
             return true;
           } else {
+            this.setState({errorMsg: "Menor de idade"});
             toast.error("Menor de idade", {
               position: toast.POSITION.TOP_RIGHT
             });
             return false;
           }
         } else {
+          this.setState({errorMsg: "CPF inválido"});
           toast.error("CPF inválido", {
             position: toast.POSITION.TOP_RIGHT
           });
           return false;
         }
       } else {
+        this.setState({errorMsg: "Quantidade maior que a disponível"});
         toast.error("Quantidade maior que a disponível", {
           position: toast.POSITION.TOP_RIGHT
         });
         return false;
       }
     } else {
+      this.setState({errorMsg: "Campos em Branco"});
       toast.error("Campos em branco", { position: toast.POSITION.TOP_RIGHT });
       return false;
     }
